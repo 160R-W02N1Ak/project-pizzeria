@@ -1,6 +1,6 @@
 import {select, classNames, templates, settings} from '../settings.js';
 import utils from '../utils.js';
-import CartProduct from '../CartProduct.js';
+import CartProduct from './CartProduct.js';
 
 class Cart {
   constructor(element){
@@ -46,10 +46,10 @@ class Cart {
       event.preventDefault();
       thisCart.sendOrder();
     });
+
   }
 
   add(menuProduct){
-
     const thisCart = this;
     const generatedHTML = templates.cartProduct(menuProduct);
     const generatedDOM = utils.createDOMFromHTML(generatedHTML);
@@ -96,25 +96,22 @@ class Cart {
     thisCart.update();
   }
 
-  sendOrder(){
+  sendOrder() {
     const thisCart = this;
-  
-    const url = `${ settings.db.url }/${ settings.db.order }`;
+    const url = settings.db.url + '/' + settings.db.order;
     const payload = {
-      contactPhone: thisCart.dom.phone,
-      contactAddress: thisCart.dom.address,
-      totalNumber: thisCart.totalNumber,
-      subtotalPrice: thisCart.subtotalPrice,
-      deliveryFee: thisCart.deliveryFee,
+      address: thisCart.dom.formAddress.value,
+      phone: thisCart.dom.formPhone.value,
       totalPrice: thisCart.totalPrice,
-      products: [],
+      subtotalPrice: thisCart.subtotalPrice,
+      totalNumber: thisCart.totalNumber,
+      deliveryFee: thisCart.deliveryFee,
+      products: []
     };
-  
-    for (let product of thisCart.products) { 
-      const test = product.getData();
-      payload.products.push(test);
+    console.log('payload', payload);
+    for(let prod of thisCart.products) {
+      payload.products.push(prod.getData());
     }
-  
     const options = {
       method: 'POST',
       headers: {
@@ -122,13 +119,7 @@ class Cart {
       },
       body: JSON.stringify(payload),
     };
-  
-    fetch(url, options)
-      .then(function(response){
-        return response.json();
-      }).then(function(parsedResponse){
-        console.log('order was send to server and save by api - parsedResponse', parsedResponse);
-      });
+    fetch(url, options);
   }
 }
 

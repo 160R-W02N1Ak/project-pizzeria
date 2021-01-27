@@ -16,6 +16,7 @@ class Product{
     thisProduct.initOrderForm();
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
+
   }
 
   renderInMenu(){
@@ -32,6 +33,7 @@ class Product{
 
     /*add element to menu */
     menuContainer.appendChild(thisProduct.element);
+
   }
 
   getElements(element){
@@ -45,8 +47,9 @@ class Product{
     thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
     thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
-    
+
     thisProduct.dom.wrapper = element;
+
   }
 
   initAccordion(){
@@ -71,6 +74,7 @@ class Product{
 
       /* toggle active class on thisProduct.element */
       thisProduct.element.classList.toggle('active');
+
     });
   }
 
@@ -93,6 +97,8 @@ class Product{
       thisProduct.processOrder();
       thisProduct.addToCart();
     });
+
+
   }
 
   processOrder(){
@@ -149,6 +155,7 @@ class Product{
     //console.log(price);
     thisProduct.priceMulti = price;
     thisProduct.priceElem.innerHTML = price;
+
   }
 
   initAmountWidget(){
@@ -162,15 +169,16 @@ class Product{
 
   addToCart(){
     const thisProduct = this;
-    
+
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
       detail: {
         product: this.prepareCartProduct(),
       },
     });
-    
+
     thisProduct.element.dispatchEvent(event);
+
   }
 
   prepareCartProduct(){
@@ -212,6 +220,7 @@ class Product{
     }
     return params;
   }
+
 }
 
-export default Product;  // export domyślny , nie trzeba stosowac nawiasow klamrowych
+export default Product;
