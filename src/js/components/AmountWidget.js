@@ -1,39 +1,45 @@
-import {select, settings} from '../settings.js';
+import {settings,select} from './../settings.js';
 import BaseWidget from './BaseWidget.js';
-
 
 class AmountWidget extends BaseWidget{
   constructor(element){
-    super(element, settings.amountWidget.defaultValue);
-
+    super(element,settings.amountWidget.defaultValue);
     const thisWidget = this;
-
     thisWidget.getElements(element);
-    /*thisWidget.value = settings.amountWidget.defaultValue;
-    thisWidget.setValue(thisWidget.dom.input.value); */
+    thisWidget.maxValue = settings.amountWidget.defaultMax;
+
     thisWidget.initActions();
 
     //console.log('AmountWidget:', thisWidget);
-    //console.log('constructor arguments:', element);
+    //console.log('constructor arguments:' , element);
   }
 
   getElements(){
     const thisWidget = this;
-
+    
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
-
-  isValid(value){
-    return !isNaN(value)
-      && value >= 0
-      && value <= 10;
+  parseValue(value){
+    return parseFloat(value);
   }
-
+  isValid(value){
+    const thisWidget=this;
+    return !isNaN(value)
+    && value>=settings.amountWidget.defaultMin
+     && value<=thisWidget.maxValue;
+  }
+  setMaxValue(newMaxValue) {
+    const thisWidget = this;
+    thisWidget.maxValue = newMaxValue;
+  }
+  resetMaxValueToDefault() {
+    const thisWidget = this;
+    thisWidget.maxValue = settings.amountWidget.defaultMax;
+  }
   renderValue(){
     const thisWidget = this;
-
     thisWidget.dom.input.value = thisWidget.value;
   }
 
@@ -41,20 +47,26 @@ class AmountWidget extends BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom.input.addEventListener('change', function(){
-      thisWidget.setValue(thisWidget.dom.input.value);
+      thisWidget.value =thisWidget.dom.input.value;
     });
 
-    thisWidget.dom.linkDecrease.addEventListener('click', function(event){
-      event.preventDefault();
-      thisWidget.setValue(thisWidget.value - 1);
+    thisWidget.dom.linkDecrease.addEventListener('click', function(event){ event.preventDefault();
+      if (thisWidget.dom.linkDecrease.classList.contains('hours')){
+        thisWidget.setValue(thisWidget.value-0.5);
+      }else{
+        thisWidget.setValue(thisWidget.value-1);
+      }
+
     });
 
-    thisWidget.dom.linkIncrease.addEventListener('click', function(event){
-      event.preventDefault();
-      thisWidget.setValue(thisWidget.value + 1);
+    thisWidget.dom.linkIncrease.addEventListener('click', function(event){ event.preventDefault();
+      if (thisWidget.dom.linkDecrease.classList.contains('hours')){
+        thisWidget.setValue(thisWidget.value+0.5);
+      }else{
+        thisWidget.setValue(thisWidget.value+1);
+      }
     });
   }
-
 }
-
 export default AmountWidget;
+  

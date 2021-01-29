@@ -1,5 +1,4 @@
-/* global Handlebars */
-
+/* global Handlebars*/
 export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
@@ -63,12 +62,16 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    starters: '[name="starter"]',
+    phone: '.order-confirmation [name="phone"]',
+    address: '.order-confirmation [name="address"]',
+    form: '.booking-form',
   },
   nav: {
     links: '.main-nav a',
   },
 };
-
+  
 export const classNames = {
   menuProduct: {
     wrapperActive: 'active',
@@ -80,6 +83,7 @@ export const classNames = {
   booking: {
     loading: 'loading',
     tableBooked: 'booked',
+    tableClicked: 'clicked',
   },
   nav: {
     active: 'active',
@@ -88,7 +92,6 @@ export const classNames = {
     active: 'active',
   },
 };
-
 export const settings = {
   hours: {
     open: 12,
@@ -119,10 +122,12 @@ export const settings = {
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
   },
+  
 };
-
 export const templates = {
-  menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+  menuProduct: Handlebars.compile(
+    document.querySelector(select.templateOf.menuProduct).innerHTML
+  ),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
 };

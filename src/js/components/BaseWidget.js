@@ -1,27 +1,36 @@
 class BaseWidget{
-  constructor(wrapperElement, initialValue){
+  constructor(wrapperElement, intialValue){
     const thisWidget = this;
 
-    thisWidget.dom = {};
-    thisWidget.dom.wrapper = wrapperElement;
+    thisWidget.dom={};
+    thisWidget.dom.wrapper= wrapperElement;
 
-    thisWidget.value = initialValue;
+    thisWidget.correctValue = intialValue;
   }
 
-  setValue(value){
+  get value(){
+    const thisWidget=this;
+
+    return thisWidget.correctValue;
+  }
+
+  set value(value) {
     const thisWidget = this;
 
     const newValue = thisWidget.parseValue(value);
-
-    /* TODO: Add validation */
-    if(thisWidget.value !== newValue && !isNaN(newValue) && thisWidget.isValid(newValue)) {
-      thisWidget.value = newValue;
+    /*TODO: Add validation*/
+    if (newValue !=thisWidget.correctValue && thisWidget.isValid(newValue)){
+      thisWidget.correctValue = newValue;
       thisWidget.announce();
     }
-
     thisWidget.renderValue();
   }
 
+  setValue(value){
+    const thisWidget=this;
+    
+    thisWidget.value=value;
+  }
   parseValue(value){
     return parseInt(value);
   }
@@ -36,15 +45,14 @@ class BaseWidget{
     thisWidget.dom.wrapper.innerHTML = thisWidget.value;
   }
 
-  announce() {
+  announce(){
     const thisWidget = this;
 
-    const event = new CustomEvent('updated', {
-      bubbles: true,
+    const event = new CustomEvent ('updated',{
+      bubbles: true
     });
-    thisWidget.dom.wrapper.dispatchEvent(event);
+    thisWidget.dom.wrapper.dispatchEvent (event);
   }
-
 }
 
 export default BaseWidget;
