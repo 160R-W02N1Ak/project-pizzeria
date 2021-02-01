@@ -69,9 +69,10 @@ export const select = {
   },
   nav: {
     links: '.main-nav a',
+    buttons: '.link-wrapper a',
   },
 };
-  
+
 export const classNames = {
   menuProduct: {
     wrapperActive: 'active',
