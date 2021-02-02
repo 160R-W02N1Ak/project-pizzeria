@@ -6,7 +6,6 @@ class AmountWidget extends BaseWidget{
     super(element,settings.amountWidget.defaultValue);
     const thisWidget = this;
     thisWidget.getElements(element);
-    thisWidget.maxValue = settings.amountWidget.defaultMax;
 
     thisWidget.initActions();
 
@@ -25,21 +24,14 @@ class AmountWidget extends BaseWidget{
     return parseFloat(value);
   }
   isValid(value){
-    const thisWidget=this;
     return !isNaN(value)
     && value>=settings.amountWidget.defaultMin
-     && value<=thisWidget.maxValue;
+     && value<=settings.amountWidget.defaultMax;
   }
-  setMaxValue(newMaxValue) {
-    const thisWidget = this;
-    thisWidget.maxValue = newMaxValue;
-  }
-  resetMaxValueToDefault() {
-    const thisWidget = this;
-    thisWidget.maxValue = settings.amountWidget.defaultMax;
-  }
+
   renderValue(){
     const thisWidget = this;
+
     thisWidget.dom.input.value = thisWidget.value;
   }
 

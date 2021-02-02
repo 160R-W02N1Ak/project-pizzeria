@@ -1,5 +1,4 @@
 /*Globals*/
-
 .home-wrapper {
   margin: 42px auto;
   padding: 72px 48px;
@@ -7,80 +6,71 @@
   border-bottom: 1px solid #e6e6e6;
   border-radius: 4px;
 }
-
 .intro.container {
   justify-content: center;  
 }
-
 .link-wrapper{
   text-align: center;
   padding: 15px 0 0 0;
- 
+
   &:hover .link-title{
   transform: translateY(-30px); 
+    transform: translateY(-30px); 
   }
+
   &:hover .subtitle{
   transform: translateY(-30px);
   opacity: 1;
+    transform: translateY(-30px);
+    opacity: 1;
   }
 }
+
 .order {
   background-image: url("../../images/assets/pizza-1.jpg");
   border-right: 2px solid  white;
 }
-
 .booking {
   background-image: url("../../images/assets/pizza-2.jpg");
   border-left: 2px solid  white;
 }
-
-
 .btn{
   text-decoration: none;
 }
-
 .link-title{
   color: $color-light;
   margin: 10px;
   transition: $transition;
 }
-
 .subtitle{
   color: $color-light;
   opacity: 0;
   transition: $transition;
 }
-
 .hours-wrapper{
   text-align: center;
   background-color: $color-main;
 }
-
 .link-title-hours{
   color: $color-light;
 }
-
 .subtitle-hours {
   color: $color-light;
 }
-
 /*slider*/
 #carousel {
   margin-top: 80px;
 }
-
 .card-horizontal {
   display: inline-flex;
   flex: 1 1 auto;
 }
-
 .card-img{
   width: 190px;
   height: 190px;
   object-fit: cover;
   border-radius: 5px;
 }
-
 .carousel-indicators li {
   width: 10px;
   height: 10px;
@@ -88,22 +78,20 @@
   background-color: #999 !important;
   background-color: rgba(70,70,70,.25) !important;
 }
-
 .carousel-indicators {
   bottom: -50px;
 }
-
 /*gallery*/
 
 .gallery {
   margin-top: 80px;  
+  margin-top: 80px;
   justify-content: center; 
 }
 
 .first-row, .second-row{
   display: inline-flex;
 }  
-
 .gallery-item{
   display: flex;
   
@@ -119,7 +107,6 @@
     opacity: 0.7;
   }  
 }
-
 .icon-wrapper{
   i{
     color: $color-light;
@@ -127,7 +114,6 @@
     padding: 4px;
     
   }
-
   i:hover{
     color: $color-main;
   }
@@ -135,5 +121,6 @@
 
 .home-page-footer {
   color:$color-main;
+  color: $color-main;
   text-align: center;
 }

@@ -1,3 +1,4 @@
+
 /* global Handlebars*/
 export const select = {
   templateOf: {
@@ -66,12 +67,15 @@ export const select = {
     phone: '.order-confirmation [name="phone"]',
     address: '.order-confirmation [name="address"]',
     form: '.booking-form',
+    button: '.order-confirmation button',
   },
   nav: {
     links: '.main-nav a',
     buttons: '.link-wrapper a',
   },
+  slider: '.rangeSlider',
 };
+  
 
 export const classNames = {
   menuProduct: {
@@ -93,6 +97,7 @@ export const classNames = {
     active: 'active',
   },
 };
+
 export const settings = {
   hours: {
     open: 12,
@@ -125,6 +130,7 @@ export const settings = {
   },
   
 };
+
 export const templates = {
   menuProduct: Handlebars.compile(
     document.querySelector(select.templateOf.menuProduct).innerHTML
